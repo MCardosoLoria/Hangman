@@ -23,8 +23,8 @@ The program will then print out whether the guess is correct.</br>
 If the guess is correct, the game will print out the word guessed and how many letters are remaining.</br>
 If the guess is in incorrect, the game will print out the number of lives you have left and ask you to try again.</p>
 
-<p>File structure of the project</p> - description of what each file represents
-Milestone 2 - This sets up the input for the game.
-milestone 3 - This check if the guess is valid and within the word.
-Milestone 4 - This defines the game and includes the previous milestones.
-Milestone 5 - This runs the game.
+<p>File structure of the project</br>
+Milestone 2 - This sets up the input for the game.</br>
+milestone 3 - This check if the guess is valid and within the word.</br>
+Milestone 4 - This defines the game and includes the previous milestones.</br>
+Milestone 5 - This runs the game.</p>
