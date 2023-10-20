@@ -9,7 +9,7 @@ class Hangman:
         self.num_lives = num_lives
         self.word = random.choice(self.word_list)
         self.word_guessed = ['_'] * len(self.word)
-        self.num_letters = len(self.word)
+        self.num_letters = len(list(set(self.word)))
         self.list_of_guesses = []
 
     def check_guess(self, guess):
@@ -19,6 +19,7 @@ class Hangman:
                 if letter == guess:
                     self.word_guessed[index] = guess
             self.num_letters -= 1
+            print(self.num_letters)
         else:
             self.num_lives -= 1
             print(f'Sorry, {guess} is not in the word.')
@@ -36,17 +37,16 @@ class Hangman:
         else:
             self.check_guess(guess)
 
-    def play_game(self, word_list):
-        num_lives = 5
-        while True:
-            game = Hangman(word_list, num_lives)
-            if num_lives == 0:
-                print('You lost!')
-            if self.num_letters > 0:
-                game.ask_for_input()
-            if self.num_lives > 0 and self.num_letters == 0:
-                print ('Congratulations. You won the game!')
+def play_game(word_list):
+    while True:
+        game = Hangman(word_list)
+        if game.num_lives == 0:
+            print('You lost!')
+            break
+        elif game.num_letters > 0:
+            game.ask_for_input()
+        elif game.num_lives > 0 and game.num_letters == 0:
+            print ('Congratulations. You won the game!')
+            break
 
-game = Hangman(word_list)
-
-game.play_game(word_list)
+play_game(word_list)
