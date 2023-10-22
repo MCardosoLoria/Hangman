@@ -8,6 +8,7 @@ class Hangman:
         self.word_list = word_list
         self.num_lives = num_lives
         self.word = random.choice(self.word_list)
+        self.word = self.word.lower()
         self.word_guessed = ['_'] * len(self.word)
         self.num_letters = len(list(set(self.word)))
         self.list_of_guesses = []
@@ -19,7 +20,6 @@ class Hangman:
                 if letter == guess:
                     self.word_guessed[index] = guess
             self.num_letters -= 1
-            print(self.num_letters)
         else:
             self.num_lives -= 1
             print(f'Sorry, {guess} is not in the word.')
@@ -27,24 +27,26 @@ class Hangman:
         self.list_of_guesses.append(guess)
 
     def ask_for_input(self):
-       while True:
-        guess = input('What is your letter?')
-        guess.lower()
-        if guess.isalpha() != True and len(guess) != 1:
-            print('Invalid letter. Please, enter a single alphabetical character.')
-        elif guess in self.list_of_guesses:
-            print('You already tried that letter!')
-        else:
-            self.check_guess(guess)
+        while True:
+            guess = input('What is your letter?')
+            if guess.isalpha() != True and len(guess) != 1:
+                print('Invalid letter. Please, enter a single alphabetical character.')
+            elif guess in self.list_of_guesses:
+                print('You already tried that letter!')
+            else:
+                self.check_guess(guess)
+                break
 
 def play_game(word_list):
+    game = Hangman(word_list)
     while True:
-        game = Hangman(word_list)
-        if game.num_lives == 0:
+        if game.num_letters > 0 and game.num_lives != 0:
+            game.ask_for_input()
+            print(game.word_guessed)
+            continue
+        elif game.num_lives == 0 and game.num_letters > 0:
             print('You lost!')
             break
-        elif game.num_letters > 0:
-            game.ask_for_input()
         elif game.num_lives > 0 and game.num_letters == 0:
             print ('Congratulations. You won the game!')
             break
